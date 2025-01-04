@@ -18,6 +18,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -67,26 +68,29 @@ public class PaymentServiceImp implements PaymentService {
     public Payment updatePaymentStatus(PaymentStatus status, Long id) {
         Payment payment = paymentRepository.findById(id).get();
         payment.setStatus(status);
-
         return paymentRepository.save(payment);
     }
 
     @Override
     public Payment save(MultipartFile file, LocalDate date, double amount,
-                        PaymetType type, String studentId) throws IOException {
-        Path folderPath = Paths.get(System.getProperty("user.home"), "university", "payments");
+                        PaymetType type, String studentCode) throws IOException {
+
+        Path folderPath = Paths.get("C:/spring/university/payments/");
         if(!folderPath.toFile().exists()){
             Files.createDirectories(folderPath);
         }
-        Path filePath = Paths.get(System.getProperty("user.home"), "university", "payments", studentId + ".pdf");
+        String uniqueFileName = studentCode + "_" + UUID.randomUUID() + ".pdf";
+        Path filePath = folderPath.resolve(uniqueFileName);
+
         Files.copy(file.getInputStream(), filePath);
-        Student student = studentRepository.findById(studentId).get();
+        Student student = studentRepository.findByCode(studentCode);
         Payment payment = Payment.builder()
+
                 .date(date).type(type).amount(amount).student(student)
                 .status(PaymentStatus.CREATED)
                 .file(filePath.toUri().toString())
                 .build();
-        return payment;
+        return paymentRepository.save(payment);
     }
 
     @Override
