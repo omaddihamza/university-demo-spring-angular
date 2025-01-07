@@ -18,6 +18,6 @@ public interface PaymentService {
     List<Payment> getPaymentsByStatus(PaymentStatus status);
     List<Payment> getPaymentsByType(PaymetType type);
     Payment updatePaymentStatus(PaymentStatus status, Long id);
-    Payment save(MultipartFile file, LocalDate date, double amount, PaymetType type, String studentId) throws IOException;
+    Payment save(MultipartFile file, LocalDate date, double amount, PaymetType type, String studentCode) throws IOException;
     byte[] gePaymentFile(Long id) throws IOException;
 }

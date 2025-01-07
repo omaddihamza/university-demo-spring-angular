@@ -64,8 +64,8 @@ public class PaymentController {
     }
 
     @PostMapping(path = "payments", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Payment save(@RequestParam MultipartFile file, LocalDate date, double amount, PaymetType type, String studentId) throws IOException {
-        return paymentService.save(file, date, amount, type, studentId);
+    public Payment save(@RequestParam("file") MultipartFile file, LocalDate date, double amount, PaymetType type, String studentCode) throws IOException {
+        return paymentService.save(file, date, amount, type, studentCode);
     }
 
     @GetMapping(path = "paymentFile/{id}", consumes = MediaType.APPLICATION_PDF_VALUE)
