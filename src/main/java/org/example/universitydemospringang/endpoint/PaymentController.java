@@ -68,7 +68,7 @@ public class PaymentController {
         return paymentService.save(file, date, amount, type, studentCode);
     }
 
-    @GetMapping(path = "paymentFile/{id}", consumes = MediaType.APPLICATION_PDF_VALUE)
+    @GetMapping(path = "paymentFile/{id}", produces  = MediaType.APPLICATION_PDF_VALUE)
     public byte[] gePaymentFile(@PathVariable Long id) throws IOException {
         return paymentService.gePaymentFile(id);
     }
