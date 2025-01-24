@@ -35,8 +35,8 @@ export class StudentsComponent implements OnInit{
     }
 
 
-  PaymentByStudent() {
-
-    this.router.navigate(['/admin/students/student-details']);
+  PaymentByStudent(code :any) {
+   console.log(code)
+    this.router.navigate([`/admin/student-details/${code}`]);
   }
 }

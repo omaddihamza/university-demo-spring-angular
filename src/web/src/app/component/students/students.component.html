@@ -41,9 +41,9 @@
         <ng-container matColumnDef="payment">
           <mat-header-cell *matHeaderCellDef> Payment </mat-header-cell>
           <mat-cell *matCellDef="let element">
-            <button mat-flat-button color="primary" (click)="PaymentByStudent()">Payment</button>
+            <button mat-flat-button color="primary" (click)="PaymentByStudent(element.code)">Payment</button>
           </mat-cell>
-        </ng-container>
+        </ng-container>-
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
