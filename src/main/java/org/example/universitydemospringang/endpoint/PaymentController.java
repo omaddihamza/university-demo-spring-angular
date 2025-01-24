@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api/")
+@CrossOrigin("*")
 public class PaymentController {
     @Autowired
     private PaymentService paymentService;
