@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit{
     const password = this.loginForm.value.password;
     const auth  = this.auth.login(username, password);
     if(auth == true){
-  this.router.navigateByUrl('/admin');
+        this.router.navigateByUrl('/admin/dashboard');
     }
   }
 }
