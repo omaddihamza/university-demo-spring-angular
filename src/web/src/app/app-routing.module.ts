@@ -12,6 +12,7 @@ import {NotFoundComponent} from "./component/not-found/not-found.component";
 import {AdminTemplateComponent} from "./component/admin-template/admin-template.component";
 import {AuthGuard} from "./guards/auth.guard";
 import {AuthorizationGuard} from "./guards/authorization-guard.guard";
+import {StudentDetailsComponent} from "./component/student-details/student-details.component";
 
 const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -19,6 +20,15 @@ const routes: Routes = [
   {path:'admin', component:AdminTemplateComponent, canActivate: [AuthGuard], children:[
       {path:'home', component:HomeComponent},
       {path:'profile', component:ProfileComponent},
+      { path:'dashboard',
+        component:DashboardComponent
+      },
+      {
+        path:'students' ,
+        component:StudentsComponent,
+      },
+      {path:'student-details/:code', component:StudentDetailsComponent},
+      {path:'payments',component:PaymentsComponent },
       {
         path:'load-students',
         component:LoadStudentsComponent,
@@ -30,10 +40,7 @@ const routes: Routes = [
         component:LoadPaymentsComponent,
         data: { roles: ['ADMIN'] }, // Static data including required roles
         canActivate: [AuthorizationGuard],
-      },
-      {path:'dashboard', component:DashboardComponent},
-      {path:'students' ,component:StudentsComponent},
-      {path:'payments',component:PaymentsComponent }
+      }
     ]},
   {path:'**' ,component:NotFoundComponent}
 
