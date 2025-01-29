@@ -19,4 +19,7 @@ export class PaymentService {
   gePaymentFile(id :any):Observable<any>{
     return this.http.get(`${this.url}paymentFile/${id}`, { responseType: 'blob' })
   }
+  savePayment(formData:any):Observable<any>{
+    return this.http.post(`${this.url}payments`,formData)
+  }
 }
