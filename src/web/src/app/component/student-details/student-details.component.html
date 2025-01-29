@@ -1,5 +1,8 @@
 <div class="container">
   <mat-card>
+    <mat-toolbar>
+      <button (click)="newPayment()" mat-flat-button color="primary">Add Payment</button>
+    </mat-toolbar>
     <mat-card-header>
       <mat-card-title>
         Payments by student {{firstName +" "+ lastName}}

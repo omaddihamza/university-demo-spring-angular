@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import {PaymentService} from "../../services/payment.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MatTableDataSource} from "@angular/material/table";
 import {Payment} from "../../model/payment.model";
 import {MatPaginator} from "@angular/material/paginator";
@@ -19,7 +19,7 @@ export class StudentDetailsComponent implements OnInit {
     displayedColumns = ['id','date','amount','type','status','file'];
     @ViewChild(MatPaginator) paginator!:MatPaginator;
 
-    constructor(public paymentService:PaymentService,private route: ActivatedRoute) {
+    constructor(public paymentService:PaymentService,private route: ActivatedRoute, private router:Router) {
     }
 
 
@@ -55,5 +55,10 @@ export class StudentDetailsComponent implements OnInit {
         console.error('Error downloading the file', err);
       },
     });
+  }
+
+  newPayment() {
+    const code = this.route.snapshot.params['code'];
+     this.router.navigate(['admin/new-payment/',code])
   }
 }
