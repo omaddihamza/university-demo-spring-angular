@@ -9,3 +9,10 @@ export interface Payment {
   file: string;
   student: Student;
 }
+
+export enum PaymentStatus {
+  CREATED, VALIDATED, REJECTED
+}
+export enum PaymetType {
+  CASH,CHECK, TRANSFER, DEPOSIT
+}
