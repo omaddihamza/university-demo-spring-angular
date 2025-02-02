@@ -1,5 +1,6 @@
 package org.example.universitydemospringang.endpoint;
 
+import org.example.universitydemospringang.dto.PaymentDTO;
 import org.example.universitydemospringang.entities.Payment;
 import org.example.universitydemospringang.enumeration.PaymentStatus;
 import org.example.universitydemospringang.enumeration.PaymetType;
@@ -65,8 +66,8 @@ public class PaymentController {
     }
 
     @PostMapping(path = "payments", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public Payment save(@RequestParam("file") MultipartFile file, LocalDate date, double amount, PaymetType type, String studentCode) throws IOException {
-        return paymentService.save(file, date, amount, type, studentCode);
+    public Payment save(@RequestParam("file") MultipartFile file, PaymentDTO paymentDTO) throws IOException {
+        return paymentService.save(file, paymentDTO);
     }
 
     @GetMapping(path = "paymentFile/{id}", produces  = MediaType.APPLICATION_PDF_VALUE)

@@ -1,5 +1,6 @@
 package org.example.universitydemospringang.services;
 
+import org.example.universitydemospringang.dto.PaymentDTO;
 import org.example.universitydemospringang.entities.Payment;
 import org.example.universitydemospringang.enumeration.PaymentStatus;
 import org.example.universitydemospringang.enumeration.PaymetType;
@@ -18,6 +19,7 @@ public interface PaymentService {
     List<Payment> getPaymentsByStatus(PaymentStatus status);
     List<Payment> getPaymentsByType(PaymetType type);
     Payment updatePaymentStatus(PaymentStatus status, Long id);
-    Payment save(MultipartFile file, LocalDate date, double amount, PaymetType type, String studentCode) throws IOException;
+    //Payment save(MultipartFile file, LocalDate date, double amount, PaymetType type, String studentCode) throws IOException;
+    Payment save(MultipartFile file, PaymentDTO paymentDTO) throws IOException;
     byte[] gePaymentFile(Long id) throws IOException;
 }

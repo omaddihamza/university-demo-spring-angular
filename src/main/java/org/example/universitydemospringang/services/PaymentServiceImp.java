@@ -1,5 +1,6 @@
 package org.example.universitydemospringang.services;
 
+import org.example.universitydemospringang.dto.PaymentDTO;
 import org.example.universitydemospringang.entities.Payment;
 import org.example.universitydemospringang.entities.Student;
 import org.example.universitydemospringang.enumeration.PaymentStatus;
@@ -72,21 +73,23 @@ public class PaymentServiceImp implements PaymentService {
     }
 
     @Override
-    public Payment save(MultipartFile file, LocalDate date, double amount,
-                        PaymetType type, String studentCode) throws IOException {
+    public Payment save(MultipartFile file, PaymentDTO paymentDTO) throws IOException {
 
         Path folderPath = Paths.get("C:/spring/university/payments/");
         if(!folderPath.toFile().exists()){
             Files.createDirectories(folderPath);
         }
-        String uniqueFileName = studentCode + "_" + UUID.randomUUID() + ".pdf";
+        String uniqueFileName = paymentDTO.getStudentCode() + "_" + UUID.randomUUID() + ".pdf";
         Path filePath = folderPath.resolve(uniqueFileName);
 
         Files.copy(file.getInputStream(), filePath);
-        Student student = studentRepository.findByCode(studentCode);
+        Student student = studentRepository.findByCode(paymentDTO.getStudentCode());
         Payment payment = Payment.builder()
 
-                .date(date).type(type).amount(amount).student(student)
+                .date(paymentDTO.getDate())
+                .type(paymentDTO.getType())
+                .amount(paymentDTO.getAmount())
+                .student(student)
                 .status(PaymentStatus.CREATED)
                 .file(filePath.toUri().toString())
                 .build();
